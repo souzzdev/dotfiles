@@ -8,28 +8,10 @@ echo "==================================="
 echo " Instalando Dotfiles"
 echo "==================================="
 
-backup_and_link() {
-    local source="$1"
-    local target="$2"
-
-    if [ -L "$target" ]; then
-        echo "Removendo link existente: $target"
-        rm "$target"
-
-    elif [ -e "$target" ]; then
-        echo "Criando backup: $target.backup"
-        mv "$target" "$target.backup"
-    fi
-
-    ln -s "$source" "$target"
-
-    echo "✓ $target"
-}
-
-echo
-echo "[1/5] Configurações"
-
+# Criar diretórios
 mkdir -p "$HOME/.config"
+
+echo "[1/6] Criando links simbólicos..."
 
 CONFIGS=(
 hypr
@@ -48,86 +30,46 @@ xsettingsd
 )
 
 for dir in "${CONFIGS[@]}"; do
-
-    if [ -d "$DOTFILES/.config/$dir" ]; then
-
-        backup_and_link \
-        "$DOTFILES/.config/$dir" \
-        "$HOME/.config/$dir"
-
-    fi
-
+    rm -rf "$HOME/.config/$dir"
+    ln -s "$DOTFILES/.config/$dir" "$HOME/.config/$dir"
 done
 
+echo "[2/6] Configurando Zsh..."
 
-echo
-echo "[2/5] Zsh"
+rm -f "$HOME/.zshrc"
+rm -f "$HOME/.p10k.zsh"
+rm -rf "$HOME/.oh-my-zsh"
 
-[ -f "$DOTFILES/.zshrc" ] && \
-backup_and_link "$DOTFILES/.zshrc" "$HOME/.zshrc"
+ln -s "$DOTFILES/.zshrc" "$HOME/.zshrc"
+ln -s "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
+ln -s "$DOTFILES/.oh-my-zsh" "$HOME/.oh-my-zsh"
 
-[ -f "$DOTFILES/.p10k.zsh" ] && \
-backup_and_link "$DOTFILES/.p10k.zsh" "$HOME/.p10k.zsh"
+echo "[3/6] Instalando wallpapers..."
 
+rm -rf "$HOME/Wallpaper"
 
-echo
-echo "[3/5] Wallpapers"
+ln -s "$DOTFILES/Wallpaper" "$HOME/Wallpaper"
 
-if [ -d "$DOTFILES/Wallpaper" ]; then
-
-    if [ -d "$HOME/Wallpaper" ]; then
-
-        mv "$HOME/Wallpaper" "$HOME/Wallpaper.backup"
-
-    fi
-
-    ln -s "$DOTFILES/Wallpaper" "$HOME/Wallpaper"
-
-    echo "✓ Wallpapers"
-
-fi
-
-
-echo
-echo "[4/5] Pacotes oficiais"
+echo "[4/6] Restaurando pacotes oficiais..."
 
 if [ -f "$DOTFILES/pacotes.txt" ]; then
-
     sudo pacman -S --needed - < "$DOTFILES/pacotes.txt"
-
 fi
 
-
-echo
-echo "[5/5] Pacotes AUR"
+echo "[5/6] Restaurando pacotes AUR..."
 
 if command -v yay &> /dev/null; then
-
     if [ -f "$DOTFILES/aur.txt" ]; then
-
         yay -S --needed - < "$DOTFILES/aur.txt"
-
     fi
-
 else
-
     echo "yay não encontrado."
-    echo "Instale o yay e execute:"
+    echo "Instale o yay manualmente e execute:"
     echo "yay -S --needed - < ~/dotfiles/aur.txt"
-
 fi
 
+echo "[6/6] Finalizado!"
 
 echo
-echo "==================================="
-echo " Instalação concluída!"
-echo "==================================="
-
-echo
-echo "Se algo der errado, procure por:"
-echo
-
-echo "~/.config/*.backup"
-echo "~/Wallpaper.backup"
-echo "~/.zshrc.backup"
-echo "~/.p10k.zsh.backup"
+echo "Recomenda-se reiniciar a sessão do Hyprland."
+echo "Tudo pronto!"
