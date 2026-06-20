@@ -1,0 +1,161 @@
+/* ==================== GRAYSCALE PRO WAYBAR ==================== */
+/* Paleta de cores (para referência):
+   #0D0D0D (Base)         - Shadow, fallback
+   #121212 (Main)         - Fundo geral
+   #1A1A1A (Surface)      - Containers
+   #222222 (Hover)        - Estados hover
+   #333333 (Active)       - Elementos ativos
+   #2A2A2A (Border)       - Bordas inativas
+   #5A5A5A (Focus)        - Workspace ativo
+   #707070 (Active)       - Máximo destaque
+   #E6E6E6 (Text Primary) - Texto principal
+   #BFBFBF (Secondary)    - Info secundária
+   #8C8C8C (Muted)        - Estado inativo
+*/
+
+/* 全局设置 */
+* {
+  font-family: "FiraCode Nerd Font Propo", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+  font-weight: bold;
+  font-size: 12px;
+  color: #E6E6E6;
+}
+
+#workspaces,
+#window,
+#tray,
+#clock,
+#network,
+#pulseaudio,
+#backlight,
+#custom-temperature,
+#memory,
+#cpu,
+#custom-lock,
+#custom-reboot,
+#custom-power,
+#custom-notifications {
+  border: 1px solid #2A2A2A;
+}
+
+
+/* 透明 Waybar 背景 */
+#waybar {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  box-shadow: none;
+}
+
+/* 所有模块统一风格 */
+#workspaces,
+#window,
+#tray {
+  background-color: #1A1A1A;
+  padding: 4px 6px;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  border-radius: 10px;
+  border-width: 0px;
+}
+
+#clock,
+#custom-power {
+  background-color: #1A1A1A;
+  margin-top: 6px;
+  margin-right: 6px;
+  padding: 4px 2px;
+  border-radius: 10px;
+  border-width: 0px;
+}
+
+#network,
+#custom-lock {
+  background-color: #1A1A1A;
+  margin-top: 6px;
+  margin-left: 6px;
+  padding: 4px 2px;
+  border-radius: 10px;
+  border-width: 0px;
+}
+
+#custom-notifications {
+  background-color: #1A1A1A;
+  margin-top: 6px;
+  font-family: Fira Code Nerd Font Propo;
+  margin-left: 6px;
+  padding: 4px 2px;
+  border-radius: 10px;
+  border-width: 0px;
+}
+
+#custom-reboot,
+#bluetooth,
+#battery,
+#pulseaudio,
+#backlight,
+#custom-temperature,
+#memory,
+#cpu {
+  background-color: #1A1A1A;
+  margin-top: 6px;
+  padding: 4px 2px;
+  border-width: 0px;
+  border-radius: 10px;
+}
+
+#custpm-temperature.critical,
+#pulseaudio.muted {
+  color: #E6E6E6;
+  padding-top: 0;
+  border-radius: 10px;
+}
+
+/* 鼠标悬停变亮一点 */
+#bluetooth:hover,
+#network:hover,
+#backlight:hover,
+#battery:hover,
+#pulseaudio:hover,
+#custom-temperature:hover,
+#memory:hover,
+#cpu:hover,
+#clock:hover,
+#custom-lock:hover,
+#custom-reboot:hover,
+#custom-power:hover,
+#window:hover {
+  background-color: #222222;
+  border-radius: 10px;
+}
+
+/* 工作区激活状态高亮 */
+#workspaces button:hover {
+  background-color: #222222;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 10px;
+}
+
+#workspaces button.active {
+  background-color: #5A5A5A;
+  color: #E6E6E6;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 10px;
+}
+
+/* 未激活工作区按钮 */
+#workspaces button {
+  background: transparent;
+  border: none;
+  color: #8C8C8C;
+  padding: 2px 8px;
+  margin: 0 2px;
+  font-weight: bold;
+}
+
+#window {
+  font-weight: 400;
+  font-style: italic;
+}

@@ -1,0 +1,135 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 27,
+    "spacing": 5,
+    "modules-left": [
+        "hyprland/workspaces",
+        "tray",
+        "custom/lock",
+        "custom/reboot",
+        "custom/power"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "backlight",
+        "custom/temperature",
+        "memory",
+        "cpu",
+        "clock",
+        "custom/notifications"
+    ],
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "*": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ]
+        },
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5"
+        }
+    },
+    "custom/notifications": {
+        "exec": "swaync-client -c",
+        "interval": 1,
+        "on-click": "swaync-client -t",
+        "on-click-right": "swaync-client -d",
+        "format": "󰂚 {}"
+    },
+    "custom/lock": {
+        "format": "<span color='#E6E6E6'>  </span>",
+        "on-click": "hyprlock",
+        "tooltip": true,
+        "tooltip-format": "锁屏"
+    },
+    "custom/reboot": {
+        "format": "<span color='#8C8C8C'>  </span>",
+        "on-click": "systemctl reboot",
+        "tooltip": true,
+        "tooltip-format": "重启"
+    },
+    "custom/power": {
+        "format": "<span color='#8C8C8C'>  </span>",
+        "on-click": "systemctl poweroff",
+        "tooltip": true,
+        "tooltip-format": "关机"
+    },
+    "network": {
+        "format-wifi": "<span color='#7AA2F7'> 󰤨 </span>{essid} ",
+        "format-ethernet": "<span color='#7AA2F7'>󰈀 </span>Wired ",
+        "format-linked": "<span color='#8C8C8C'> 󱘖 </span>{ifname} ",
+        "format-disconnected": "<span color='#8C8C8C'>  </span>Offline ",
+        "format-alt": "<span color='#7AA2F7'> 󰤨 </span>{signalStrength}% ",
+        "interval": 1
+    },
+    "pulseaudio": {
+        "format": "<span color='#7AA2F7'>{icon}</span>{volume}% ",
+        "format-muted": "<span color='#8C8C8C'> 󰖁 </span>0% ",
+        "format-icons": {
+            "headphone": "<span color='#7AA2F7'>  </span>",
+            "hands-free": "<span color='#7AA2F7'>  </span>",
+            "headset": "<span color='#7AA2F7'>  </span>",
+            "phone": "<span color='#7AA2F7'>  </span>",
+            "portable": "<span color='#7AA2F7'>  </span>",
+            "car": "<span color='#7AA2F7'>  </span>",
+            "default": [
+                "<span color='#8C8C8C'>  </span>",
+                "<span color='#BFBFBF'>  </span>",
+                "<span color='#7AA2F7'>  </span>"
+            ]
+        }
+    },
+    "custom/temperature": {
+        "exec": "sensors | awk '/^Package id 0:/ {print int($4)}'",
+        "format": "<span color='#BFBFBF'>  </span>{}°C ",
+        "interval": 5,
+        "tooltip": true,
+        "tooltip-format": "当前 CPU 温度: {}°C"
+    },
+    "memory": {
+        "format": "<span color='#BFBFBF'>  </span>{used:0.1f}G/{total:0.1f}G ",
+        "tooltip": true,
+        "tooltip-format": "当前内存占比: {used:0.2f}G/{total:0.2f}G"
+    },
+    "cpu": {
+        "format": "<span color='#BFBFBF'>  </span>{usage}% ",
+        "tooltip": true
+    },
+    "clock": {
+        "interval": 1,
+        "timezone": "America/Sao_Paulo",
+        "format": "<span color='#E6E6E6'>  </span>{:%H:%M} ",
+        "tooltip": true,
+        "tooltip-format": "{:%d/%m/%Y - %A}"
+    },
+    "backlight": {
+        "format": "<span color='#BFBFBF'>{icon}</span>{percent}% ",
+        "format-icons": [
+            "<span color='#8C8C8C'> 󰃞 </span>",
+            "<span color='#BFBFBF'> 󰃝 </span>",
+            "<span color='#E6E6E6'> 󰃟 </span>",
+            "<span color='#E6E6E6'> 󰃠 </span>"
+        ]
+    },
+    "bluetooth": {
+        "format": "<span color='#7AA2F7'>  </span>{status} ",
+        "format-connected": "<span color='#7AA2F7'>  </span>{device_alias} ",
+        "format-connected-battery": "<span color='#7AA2F7'>  </span>{device_alias}{device_battery_percentage}% "
+    }
+}
