@@ -15,7 +15,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias ls="exa -l"
 
-export DB_PASSWORD="Qw8t2ZQM1eqCMAKD"
+export DB_PASSWORD=""
 
 eval "$(ssh-agent -s)" > /dev/null
 ssh-add ~/.ssh/id_ed25519 2>/dev/null
